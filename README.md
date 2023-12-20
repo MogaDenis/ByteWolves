@@ -1,6 +1,6 @@
-# byte_wolves
+# Byte Wolves
 
-A new Flutter project.
+This is the source code of our project developed during ThinkTank Lab.
 
 ## Getting Started
 
