@@ -1,4 +1,4 @@
-import 'package:byte_wolves/assets/constants/constants.dart';
+import '/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() {
