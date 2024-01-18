@@ -10,10 +10,9 @@ class ColorConstants {
   // and so on...
 }
 
-
 // Add to this all fonts used.
 class FontConstants {
-  static String? roboto = GoogleFonts.roboto().fontFamily; 
+  static String? roboto = GoogleFonts.roboto().fontFamily;
   static String? lato = GoogleFonts.lato().fontFamily;
   static String? luxuriousRoman = GoogleFonts.luxuriousRoman().fontFamily;
   static String? openSans = GoogleFonts.openSans().fontFamily;
@@ -21,19 +20,27 @@ class FontConstants {
   // and so on...
 }
 
+class CustomTextStyles {
+  static const hintTextStyle = TextStyle(
+    color: Colors.white54,
+    fontFamily: 'OpenSans',
+  );
 
-const hintTextStyle = TextStyle(
-  color: Colors.white54,
-  fontFamily: 'OpenSans',
-);
+  static const textFieldTextStyle = TextStyle(
+    color: Colors.white,
+    fontFamily: 'OpenSans',
+  );
 
-const labelStyle = TextStyle(
-  color: Colors.white,
-  fontWeight: FontWeight.bold,
-  fontFamily: 'OpenSans',
-);
+  static const labelStyle = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'OpenSans',
+  );
+}
 
-final boxDecorationStyle = BoxDecoration(
+
+class CustomBoxDecorations {
+  static final boxDecorationStyle = BoxDecoration(
   color: const Color(0xFF6CA8F1),
   borderRadius: BorderRadius.circular(10.0),
   boxShadow: const [
@@ -44,3 +51,7 @@ final boxDecorationStyle = BoxDecoration(
     ),
   ],
 );
+}
+
+
+
