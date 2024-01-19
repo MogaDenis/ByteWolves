@@ -38,20 +38,24 @@ class CustomTextStyles {
   );
 }
 
-
 class CustomBoxDecorations {
   static final boxDecorationStyle = BoxDecoration(
-  color: const Color(0xFF6CA8F1),
-  borderRadius: BorderRadius.circular(10.0),
-  boxShadow: const [
-    BoxShadow(
-      color: Colors.black12,
-      blurRadius: 6.0,
-      offset: Offset(0, 2),
-    ),
-  ],
-);
+    color: const Color(0xFF6CA8F1),
+    borderRadius: BorderRadius.circular(10.0),
+    boxShadow: const [
+      BoxShadow(
+        color: Colors.black12,
+        blurRadius: 6.0,
+        offset: Offset(0, 2),
+      ),
+    ],
+  );
 }
 
+class ImagesConstants {
+  static const String logoImage = 'assets/images/logo.png';
+}
 
-
+class StringConstants {
+  static const String profileTitle = 'Profile';
+}
