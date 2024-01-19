@@ -4,6 +4,7 @@ import 'package:byte_wolves/screens/profile_screen.dart';
 import 'package:byte_wolves/screens/signin_screen.dart';
 import 'package:byte_wolves/screens/signup_screen.dart';
 import 'package:byte_wolves/screens/splash_screen.dart';
+import 'package:byte_wolves/screens/input_question.dart';
 
 import 'package:flutter/material.dart';
 
@@ -123,6 +124,23 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: const Text(
                       'Go to "Profile" screen',
+                      style: TextStyle(
+                        color: Color(0xFF527DAA),
+                        letterSpacing: 0.5,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => InputQuestion(question: "What is the capital of France?", correctAnswer: "paris")));
+                    },
+                    child: const Text(
+                      'Go to "Input Question" screen',
                       style: TextStyle(
                         color: Color(0xFF527DAA),
                         letterSpacing: 0.5,
