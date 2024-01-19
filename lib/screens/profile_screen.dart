@@ -36,23 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(
           children: <Widget>[
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFF73AEF5),
-                    Color(0xFF61A4F1),
-                    Color(0xFF478DE0),
-                    Color(0xFF398AE5),
-                  ],
-                  stops: [0.1, 0.4, 0.7, 0.9],
-                ),
-              ),
-            ),
+            CustomContainers.backgroundContainer,
             SizedBox(
               height: double.infinity,
               child: SingleChildScrollView(
@@ -77,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ],
                         image: DecorationImage(
-                          image: AssetImage("assets/images/logo.png"),
+                          image: AssetImage(ImagesConstants.logoImage),
                         ),
                       ),
                     ),

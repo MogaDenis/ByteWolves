@@ -59,3 +59,24 @@ class ImagesConstants {
 class StringConstants {
   static const String profileTitle = 'Profile';
 }
+
+class CustomContainers {
+  // This container is used as a background, put it as the first child of a "Stack" widget.
+  static final backgroundContainer = Container(
+    height: double.infinity,
+    width: double.infinity,
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color(0xFF73AEF5),
+          Color(0xFF61A4F1),
+          Color(0xFF478DE0),
+          Color(0xFF398AE5),
+        ],
+        stops: [0.1, 0.4, 0.7, 0.9],
+      ),
+    ),
+  );
+}

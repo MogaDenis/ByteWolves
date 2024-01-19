@@ -1,8 +1,21 @@
-import '/constants/constants.dart';
+import 'package:byte_wolves/constants/constants.dart';
+import 'package:byte_wolves/screens/lectures.dart';
+import 'package:byte_wolves/screens/profile_screen.dart';
+import 'package:byte_wolves/screens/signin_screen.dart';
+import 'package:byte_wolves/screens/signup_screen.dart';
+import 'package:byte_wolves/screens/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    initialRoute: '/splash',
+    routes: {
+      '/splash': (context) => const SplashScreen(),
+      '/home': (context) => const MyApp(),
+    },
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -10,22 +23,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: ColorConstants.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -35,24 +41,107 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'This is the starting point of our project! :)',
-              style: TextStyle(
-                fontFamily: FontConstants.openSans,
-                fontSize: 32,
+      body: Stack(
+        children: <Widget>[
+          CustomContainers.backgroundContainer,
+          SizedBox(
+            height: double.infinity,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    'Developers navigator',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'OpenSans',
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SignInScreen()));
+                    },
+                    child: const Text(
+                      'Go to "Sign In" screen',
+                      style: TextStyle(
+                        color: Color(0xFF527DAA),
+                        letterSpacing: 0.5,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SingUpScreen()));
+                    },
+                    child: const Text(
+                      'Go to "Sign Up" screen',
+                      style: TextStyle(
+                        color: Color(0xFF527DAA),
+                        letterSpacing: 0.5,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LecturePage(
+                              lecture: Lectures(
+                                  title: "Lecture dummy",
+                                  body:
+                                      "Please watch this highly educational video. :)",
+                                  youtubeUrl: "J4Zwc6UzxAg"))));
+                    },
+                    child: const Text(
+                      'Go to "Lecture" screen',
+                      style: TextStyle(
+                        color: Color(0xFF527DAA),
+                        letterSpacing: 0.5,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const ProfileScreen()));
+                    },
+                    child: const Text(
+                      'Go to "Profile" screen',
+                      style: TextStyle(
+                        color: Color(0xFF527DAA),
+                        letterSpacing: 0.5,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                  ),
+
+                  // Add here a button to navigate to the new screen that you have created.
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+
+    // return
   }
 }
