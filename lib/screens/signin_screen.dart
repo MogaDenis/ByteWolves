@@ -17,9 +17,9 @@ class _LoginScreenState extends State<SignInScreen> {
 
   bool? _rememberMe = false;
 
-  void _singUpButtonPressed() {
+  void _signUpButtonPressed() {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const SingUpScreen()));
+        .push(MaterialPageRoute(builder: (context) => const SignUpScreen()));
   }
 
   Widget _buildUsernameTextField() {
@@ -178,7 +178,7 @@ class _LoginScreenState extends State<SignInScreen> {
           padding: const EdgeInsets.symmetric(vertical: 5.0),
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: _singUpButtonPressed,
+            onPressed: _signUpButtonPressed,
             child: const Text(
               'Create new account',
               style: TextStyle(

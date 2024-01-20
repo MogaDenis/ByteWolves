@@ -9,14 +9,16 @@ import 'package:byte_wolves/screens/input_question.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    initialRoute: '/splash',
-    routes: {
-      '/splash': (context) => const SplashScreen(),
-      '/home': (context) => const MyApp(),
-    },
-  ));
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/splash',
+      routes: {
+        '/splash': (context) => const SplashScreen(),
+        '/home': (context) => const MyApp(),
+      },
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -81,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const SingUpScreen()));
+                          builder: (context) => const SignUpScreen()));
                     },
                     child: const Text(
                       'Go to "Sign Up" screen',
@@ -137,7 +139,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => InputQuestion(question: "What is the capital of France?", correctAnswer: "paris")));
+                          builder: (context) => const InputQuestion(
+                              question: "What is the capital of France?",
+                              correctAnswer: "paris")));
                     },
                     child: const Text(
                       'Go to "Input Question" screen',
@@ -159,7 +163,5 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
-
-    // return
   }
 }
