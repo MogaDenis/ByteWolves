@@ -1,14 +1,15 @@
 import 'package:byte_wolves/constants/constants.dart';
+import 'package:byte_wolves/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
 
-class SingUpScreen extends StatefulWidget {
-  const SingUpScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SingUpScreen> createState() => _SingUpScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SingUpScreenState extends State<SingUpScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _usernameTextFieldController =
       TextEditingController();
   final TextEditingController _passwordTextFieldController =
@@ -170,7 +171,8 @@ class _SingUpScreenState extends State<SingUpScreen> {
           child: ElevatedButton(
             // Return to the Sign In scrren.
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const SignInScreen()));
             },
             child: const Text(
               'Sign In',
@@ -247,7 +249,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

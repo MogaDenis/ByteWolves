@@ -54,6 +54,7 @@ class CustomBoxDecorations {
 
 class ImagesConstants {
   static const String logoImage = 'assets/images/logo.png';
+  static const String fullWolfImage = 'assets/images/full_wolf.png';
 }
 
 class StringConstants {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:byte_wolves/constants/constants.dart';
 
 class InputQuestion extends StatefulWidget {
-  late String question;
-  late String correctAnswer;
+  final String question;
+  final String correctAnswer;
 
-  InputQuestion({required this.question, required this.correctAnswer});
+  const InputQuestion({super.key, required this.question, required this.correctAnswer});
 
   @override
   State<InputQuestion> createState() => _InputQuestionState();
@@ -71,72 +71,62 @@ class _InputQuestionState extends State<InputQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: Stack(children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF73AEF5),
-                      Color(0xFF61A4F1),
-                      Color(0xFF478DE0),
-                      Color(0xFF398AE5),
-                    ],
-                    stops: [0.1, 0.4, 0.7, 0.9],
-                  ),
+      resizeToAvoidBottomInset: true,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Stack(
+          children: <Widget>[
+            CustomContainers.backgroundContainer,
+            SizedBox(
+              height: double.infinity,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(20, 100, 20, 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Center(
+                      child: Text(
+                        widget.question,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(height: 20.0), // Add some spacing
+                    // Add the image here
+                    Image.asset(
+                      ImagesConstants.fullWolfImage,
+                      height: 200.0, // Adjust the height as needed
+                    ),
+                    const SizedBox(height: 15.00),
+                    _inputAnswer(),
+                    const SizedBox(height: 150.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        _checkAnswer();
+                      },
+                      child: const Text(
+                        'Submit your answer',
+                        style: TextStyle(
+                          color: Color(0xFF527DAA),
+                          letterSpacing: 0.5,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                    padding: const EdgeInsets.fromLTRB(20, 100, 20, 10),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Center(
-                            child: Text(
-                              widget.question,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'OpenSans',
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          const SizedBox(height: 20.0), // Add some spacing
-                          // Add the image here
-                          Image.asset(
-                            'assets/images/full_wolf.png',
-                            height: 200.0, // Adjust the height as needed
-                          ),
-                          const SizedBox(height: 15.00),
-                          _inputAnswer(),
-                          const SizedBox(height: 150.0),
-                          ElevatedButton(
-                            onPressed: () {
-                              _checkAnswer();
-                            },
-                            child: const Text(
-                              'Submit your answer',
-                              style: TextStyle(
-                                color: Color(0xFF527DAA),
-                                letterSpacing: 0.5,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'OpenSans',
-                              ),
-                            ),
-                          ),
-                        ])),
-              )
-            ])));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
