@@ -1,7 +1,7 @@
 import 'package:byte_wolves/constants/constants.dart';
 import 'package:byte_wolves/screens/lectures.dart';
 import 'package:byte_wolves/screens/profile_screen.dart';
-import 'package:byte_wolves/screens/signin_screen.dart';
+import 'package:byte_wolves/screens/login_screen.dart';
 import 'package:byte_wolves/screens/signup_screen.dart';
 import 'package:byte_wolves/screens/splash_screen.dart';
 import 'package:byte_wolves/screens/input_question.dart';
@@ -66,10 +66,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const SignInScreen()));
+                          builder: (context) => const LogInScreen()));
                     },
                     child: const Text(
-                      'Go to "Sign In" screen',
+                      'Go to "Log In" screen',
                       style: TextStyle(
                         color: Color(0xFF527DAA),
                         letterSpacing: 0.5,
