@@ -2,14 +2,14 @@ import 'package:byte_wolves/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import '/constants/constants.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class LogInScreen extends StatefulWidget {
+  const LogInScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _LoginScreenState();
+  State<LogInScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<SignInScreen> {
+class _LoginScreenState extends State<LogInScreen> {
   final TextEditingController _usernameTextFieldController =
       TextEditingController();
   final TextEditingController _passwordTextFieldController =
@@ -131,14 +131,14 @@ class _LoginScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget _buildSignInButton() {
+  Widget _buildLogInButton() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {}, // TODO
         child: const Text(
-          'Sign In',
+          'Log In',
           style: TextStyle(
             color: Color(0xFF527DAA),
             letterSpacing: 0.5,
@@ -248,7 +248,7 @@ class _LoginScreenState extends State<SignInScreen> {
                     _buildPasswordTextField(),
                     _buildForgotPasswordButton(),
                     _buildRememberMeCheckbox(),
-                    _buildSignInButton(),
+                    _buildLogInButton(),
                     _buildNewAccountButton(),
                   ],
                 ),

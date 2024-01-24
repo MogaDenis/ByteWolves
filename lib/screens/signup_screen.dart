@@ -1,5 +1,5 @@
 import 'package:byte_wolves/constants/constants.dart';
-import 'package:byte_wolves/screens/signin_screen.dart';
+import 'package:byte_wolves/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -172,10 +172,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             // Return to the Sign In scrren.
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const SignInScreen()));
+                  builder: (context) => const LogInScreen()));
             },
             child: const Text(
-              'Sign In',
+              'Log In',
               style: TextStyle(
                 color: Color(0xFF527DAA),
                 letterSpacing: 0.5,
