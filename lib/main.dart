@@ -156,6 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
@@ -173,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 )));
                       },
                       child: const Text(
-                        "Go to Multiple Answer Question screen",
+                        'Go to "Multiple Answer Question" screen',
                         style: TextStyle(
                           color: Color(0xFF527DAA),
                           letterSpacing: 0.5,
