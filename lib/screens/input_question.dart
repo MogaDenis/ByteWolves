@@ -5,7 +5,8 @@ class InputQuestion extends StatefulWidget {
   final String question;
   final String correctAnswer;
 
-  const InputQuestion({super.key, required this.question, required this.correctAnswer});
+  const InputQuestion(
+      {super.key, required this.question, required this.correctAnswer});
 
   @override
   State<InputQuestion> createState() => _InputQuestionState();

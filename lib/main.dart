@@ -1,5 +1,7 @@
 import 'package:byte_wolves/constants/constants.dart';
+import 'package:byte_wolves/models/answer.dart';
 import 'package:byte_wolves/screens/lectures.dart';
+import 'package:byte_wolves/screens/multiple_answer_question.dart';
 import 'package:byte_wolves/screens/profile_screen.dart';
 import 'package:byte_wolves/screens/login_screen.dart';
 import 'package:byte_wolves/screens/signup_screen.dart';
@@ -154,6 +156,32 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => MultipleAnswerQuestion(
+                                  questionText:
+                                      "What is the capital of France?",
+                                  answer1: Answer(
+                                      answerText: "Paris", isCorrect: true),
+                                  answer2: Answer(
+                                      answerText: "Berlin", isCorrect: false),
+                                  answer3: Answer(
+                                      answerText: "London", isCorrect: false),
+                                  answer4: Answer(
+                                      answerText: "Madrid", isCorrect: false),
+                                )));
+                      },
+                      child: const Text(
+                        "Go to Multiple Answer Question screen",
+                        style: TextStyle(
+                          color: Color(0xFF527DAA),
+                          letterSpacing: 0.5,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        ),
+                      ))
 
                   // Add here a button to navigate to the new screen that you have created.
                 ],
