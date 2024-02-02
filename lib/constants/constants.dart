@@ -81,3 +81,12 @@ class CustomContainers {
     ),
   );
 }
+
+class ApiConstants {
+  static String baseUrl = 'http://localhost:5232/api';
+
+  // For get all/add it's just the url, for update/delete/get by id it's the url/id
+  static String lecturesUrl = '$baseUrl/lectures';
+  static String questionsUrl = '$baseUrl/questions';
+  static String usersUrl = '$baseUrl/users';
+}

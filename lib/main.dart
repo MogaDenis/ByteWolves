@@ -1,5 +1,6 @@
 import 'package:byte_wolves/constants/constants.dart';
 import 'package:byte_wolves/models/answer.dart';
+import 'package:byte_wolves/screens/fill_word_question.dart';
 import 'package:byte_wolves/screens/lectures.dart';
 import 'package:byte_wolves/screens/multiple_answer_question.dart';
 import 'package:byte_wolves/screens/profile_screen.dart';
@@ -182,7 +183,27 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         ),
-                      ))
+                      )),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => FillWordQuestion(
+                              text: "____ is the capital of France.",
+                              answer: Answer(
+                                  answerText: "paris", isCorrect: true))));
+                    },
+                    child: const Text(
+                      'Go to "Fill Word Question" screen',
+                      style: TextStyle(
+                        color: Color(0xFF527DAA),
+                        letterSpacing: 0.5,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                  ),
 
                   // Add here a button to navigate to the new screen that you have created.
                 ],
