@@ -31,9 +31,12 @@ class _FillWordQuestionState extends State<FillWordQuestion> {
     return Text(
       widget.text,
       style: const TextStyle(
-        fontSize: 20,
+        color: Color(0xFF527DAA),
+        fontSize: 25.0,
         fontWeight: FontWeight.bold,
+        fontFamily: 'OpenSans',
       ),
+      textAlign: TextAlign.center,
     );
   }
 
@@ -44,6 +47,8 @@ class _FillWordQuestionState extends State<FillWordQuestion> {
         labelText: 'Answer',
         labelStyle: TextStyle(
           color: Colors.white,
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold,
           fontFamily: 'OpenSans',
         ),
         focusedBorder: OutlineInputBorder(
@@ -64,12 +69,20 @@ class _FillWordQuestionState extends State<FillWordQuestion> {
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
         textStyle: const TextStyle(
-          fontSize: 20,
+          color: Colors.white,
+          fontSize: 20.0,
+          fontFamily: 'OpenSans',
+        ),
+      ),
+      child: const Text(
+        'Submit',
+        style: TextStyle(
+          color: Color(0xFF527DAA),
+          fontSize: 20.0,
           fontWeight: FontWeight.bold,
           fontFamily: 'OpenSans',
         ),
       ),
-      child: const Text('Submit'),
     );
   }
 
