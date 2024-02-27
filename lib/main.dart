@@ -1,6 +1,7 @@
 import 'package:byte_wolves/constants/constants.dart';
 import 'package:byte_wolves/models/answer.dart';
 import 'package:byte_wolves/screens/lectures.dart';
+import 'package:byte_wolves/screens/levels_map.dart';
 import 'package:byte_wolves/screens/multiple_answer_question.dart';
 import 'package:byte_wolves/screens/profile_screen.dart';
 import 'package:byte_wolves/screens/login_screen.dart';
@@ -182,7 +183,25 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         ),
-                      ))
+                      )),
+                  const SizedBox(height: 20),
+                  ElevatedButton (
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const LevelMapPage(
+                              currentLevel: 3.0)));
+                    },
+                    child: const Text(
+                      'Go to "Level Map" screen',
+                      style: TextStyle(
+                        color: Color(0xFF527DAA),
+                        letterSpacing: 0.5,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                  ),
 
                   // Add here a button to navigate to the new screen that you have created.
                 ],
