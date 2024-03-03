@@ -58,6 +58,7 @@ class ImagesConstants {
   static const String levelLockedImage = 'assets/images/lock.ico';
   static const String levelUnlockedImage = 'assets/images/unlock.ico';
   static const String cloudsImage = 'assets/images/clouds.png';
+  static const String trophyImage = 'assets/images/trofeu.png';
 }
 
 class StringConstants {
