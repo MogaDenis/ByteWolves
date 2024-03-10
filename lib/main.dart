@@ -9,6 +9,7 @@ import 'package:byte_wolves/screens/multiple_answer_question.dart';
 import 'package:byte_wolves/screens/profile_screen.dart';
 import 'package:byte_wolves/screens/signup_screen.dart';
 import 'package:byte_wolves/screens/splash_screen.dart';
+import 'package:byte_wolves/service/lecture_serive.dart';
 import 'package:byte_wolves/service/question_service.dart';
 import 'package:flutter/material.dart';
 
@@ -104,14 +105,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      final lecture = await LectureService().getById(3);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => LecturePage(
                               lecture: Lectures(
-                                  title: "Lecture dummy",
+                                  title: lecture.title,
                                   body:
-                                      "Please watch this highly educational video. :)",
-                                  youtubeUrl: "J4Zwc6UzxAg"))));
+                                      lecture.body,
+                                  youtubeUrl: lecture.youtubeUrl))));
                     },
                     child: const Text(
                       'Go to "Lecture" screen',
