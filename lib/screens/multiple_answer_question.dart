@@ -1,21 +1,11 @@
 import 'package:byte_wolves/constants/constants.dart';
 import 'package:byte_wolves/models/answer.dart';
+import 'package:byte_wolves/models/question.dart';
 import 'package:flutter/material.dart';
 
 class MultipleAnswerQuestion extends StatefulWidget {
-  final String questionText;
-  final Answer answer1;
-  final Answer answer2;
-  final Answer answer3;
-  final Answer answer4;
-
-  const MultipleAnswerQuestion(
-      {super.key,
-      required this.questionText,
-      required this.answer1,
-      required this.answer2,
-      required this.answer3,
-      required this.answer4});
+  final Question? question;
+  const MultipleAnswerQuestion({super.key, required this.question});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -44,7 +34,7 @@ class _MultipleAnswerQuestionState extends State<MultipleAnswerQuestion> {
   Widget _question() {
     return Center(
       child: Text(
-        widget.questionText,
+        widget.question!.text,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 35.0,
@@ -113,9 +103,21 @@ class _MultipleAnswerQuestionState extends State<MultipleAnswerQuestion> {
                     const SizedBox(height: 20.0),
                     Column(
                       children: <Widget>[
-                        _answersGroup(widget.answer1, widget.answer2),
+                        _answersGroup(
+                            Answer(
+                                answerText: widget.question!.correctAnswer,
+                                isCorrect: true),
+                            Answer(
+                                answerText: widget.question!.wa1,
+                                isCorrect: false)),
                         const SizedBox(height: 20.0),
-                        _answersGroup(widget.answer3, widget.answer4),
+                        _answersGroup(
+                            Answer(
+                                answerText: widget.question!.wa2,
+                                isCorrect: false),
+                            Answer(
+                                answerText: widget.question!.wa3,
+                                isCorrect: false)),
                       ],
                     ),
                   ],

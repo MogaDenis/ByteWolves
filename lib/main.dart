@@ -1,18 +1,18 @@
 import 'package:byte_wolves/constants/constants.dart';
-import 'package:byte_wolves/models/answer.dart';
+import 'package:byte_wolves/models/question.dart';
+import 'package:byte_wolves/screens/endquiz_screen.dart';
+import 'package:byte_wolves/screens/input_question.dart';
 import 'package:byte_wolves/screens/lectures.dart';
 import 'package:byte_wolves/screens/levels_map.dart';
+import 'package:byte_wolves/screens/login_screen.dart';
 import 'package:byte_wolves/screens/multiple_answer_question.dart';
 import 'package:byte_wolves/screens/profile_screen.dart';
-import 'package:byte_wolves/screens/login_screen.dart';
 import 'package:byte_wolves/screens/signup_screen.dart';
 import 'package:byte_wolves/screens/splash_screen.dart';
-import 'package:byte_wolves/screens/input_question.dart';
-import 'package:byte_wolves/screens/endquiz_screen.dart';
-
+import 'package:byte_wolves/service/question_service.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -30,15 +30,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
   }
 }
 
+// ignore: must_be_immutable
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  late Question question;
+  MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -68,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   const SizedBox(height: 40),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const LogInScreen()));
                     },
@@ -160,19 +162,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        final question = await QuestionService().getById(1);
+                        // ignore: use_build_context_synchronously
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => MultipleAnswerQuestion(
-                                  questionText:
-                                      "What is the capital of France?",
-                                  answer1: Answer(
-                                      answerText: "Paris", isCorrect: true),
-                                  answer2: Answer(
-                                      answerText: "Berlin", isCorrect: false),
-                                  answer3: Answer(
-                                      answerText: "London", isCorrect: false),
-                                  answer4: Answer(
-                                      answerText: "Madrid", isCorrect: false),
+                                  question: question,
                                 )));
                       },
                       child: const Text(
@@ -186,11 +181,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       )),
                   const SizedBox(height: 20),
-                  ElevatedButton (
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const LevelMapPage(
-                              currentLevel: 3.0)));
+                          builder: (context) =>
+                              const LevelMapPage(currentLevel: 3.0)));
                     },
                     child: const Text(
                       'Go to "Level Map" screen',
@@ -204,10 +199,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  ElevatedButton (
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => EndQuizScreen(score: 100)));
+                          builder: (context) =>
+                              const EndQuizScreen(score: 100)));
                     },
                     child: const Text(
                       'Go to "EndQuiz" screen',

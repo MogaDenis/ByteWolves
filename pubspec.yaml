@@ -38,6 +38,7 @@ dependencies:
   google_fonts: ^6.1.0
   youtube_player_flutter: ^8.1.2
   level_map: ^0.2.0
+  dio: ^5.4.1
 
 dev_dependencies:
   flutter_test:
