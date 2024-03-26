@@ -1,8 +1,11 @@
+import 'package:byte_wolves/models/user.dart';
 import 'package:flutter/material.dart';
 import '/constants/constants.dart';
+import 'login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final User user;
+  const ProfileScreen({super.key, required this.user});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -14,7 +17,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new)),
+            onPressed: () {
+              Navigator.pop(context);
+            }, icon: const Icon(Icons.arrow_back_ios_new)),
         title: Text(
           StringConstants.profileTitle,
           style: TextStyle(
@@ -66,18 +71,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     const SizedBox(height: 10.0),
-                    const Text(
-                      'Byte Wolves',
-                      style: TextStyle(
+                    Text(
+                      widget.user.username,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontFamily: 'OpenSans',
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
-                      '@byte_wolves',
-                      style: TextStyle(
+                    Text(
+                      '@${widget.user.email}',
+                      style: const TextStyle(
                         color: Colors.white,
                         fontFamily: 'OpenSans',
                         fontSize: 17.0,
@@ -208,7 +213,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ProfileMenuWidget(
                         title: 'Log Out',
                         icon: Icons.logout,
-                        onPress: () {},
+                        onPress: () async {
+                          // Log out the user
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const LogInScreen()));
+                        },
                         endIcon: false,
                         color: Colors.red),
                   ],

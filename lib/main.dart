@@ -9,8 +9,9 @@ import 'package:byte_wolves/screens/multiple_answer_question.dart';
 import 'package:byte_wolves/screens/profile_screen.dart';
 import 'package:byte_wolves/screens/signup_screen.dart';
 import 'package:byte_wolves/screens/splash_screen.dart';
-import 'package:byte_wolves/service/lecture_serive.dart';
+import 'package:byte_wolves/service/lecture_service.dart';
 import 'package:byte_wolves/service/question_service.dart';
+import 'package:byte_wolves/service/user_service.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -128,9 +129,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      final user = await UserService().getById(1);
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ProfileScreen()));
+                          builder: (context) => ProfileScreen(
+                            user: user
+                          )));
                     },
                     child: const Text(
                       'Go to "Profile" screen',
