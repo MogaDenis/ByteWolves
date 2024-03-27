@@ -112,12 +112,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       thickness: 0,
                     ),
                     /// PROFILE STATS CONTAINING LECTURES PASSED, EXPERIENCE, AND LEVELS PASSED
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Column(
                           children: [
-                            Text(
+                            const Text(
                               'Lectures',
                               style: TextStyle(
                                 color: Colors.white,
@@ -126,10 +126,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 10.0),
+                            const SizedBox(height: 10.0),
                             Text(
-                              '0',
-                              style: TextStyle(
+                              widget.user.lectures.toString(),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'OpenSans',
                                 fontSize: 18.0,
@@ -140,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         Column(
                           children: [
-                            Text(
+                            const Text(
                               'Experience',
                               style: TextStyle(
                                 color: Colors.white,
@@ -151,8 +151,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             SizedBox(height: 10.0),
                             Text(
-                              '0',
-                              style: TextStyle(
+                              widget.user.experience.toString(),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'OpenSans',
                                 fontSize: 18.0,
@@ -163,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         Column(
                           children: [
-                            Text(
+                            const Text(
                               'Levels',
                               style: TextStyle(
                                 color: Colors.white,
@@ -174,8 +174,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             SizedBox(height: 10.0),
                             Text(
-                              '0',
-                              style: TextStyle(
+                              widget.user.level.toString(),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'OpenSans',
                                 fontSize: 18.0,
