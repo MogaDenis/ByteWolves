@@ -81,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     Text(
-                      '@${widget.user.email}',
+                      widget.user.email,
                       style: const TextStyle(
                         color: Colors.white,
                         fontFamily: 'OpenSans',
@@ -111,7 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       color: Color(0xFF61A4F1),
                       thickness: 0,
                     ),
-                    /// PROFILE STATS CONTAINING LECTURES PASSED, EXPERIENCE, AND LEVELS PASSED
+                    /// PROFILE STATS CONTAINING LECTURES PASSED, EXPERIENCE, AND current level
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -149,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 10.0),
+                            const SizedBox(height: 10.0),
                             Text(
                               widget.user.experience.toString(),
                               style: const TextStyle(
@@ -164,7 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Column(
                           children: [
                             const Text(
-                              'Levels',
+                              'Level',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'OpenSans',
@@ -172,7 +172,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 10.0),
+                            const SizedBox(height: 10.0),
                             Text(
                               widget.user.level.toString(),
                               style: const TextStyle(

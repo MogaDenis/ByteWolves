@@ -1,6 +1,10 @@
 import 'package:byte_wolves/constants/constants.dart';
+import 'package:byte_wolves/models/user.dart';
 import 'package:byte_wolves/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:byte_wolves/service/logging_service.dart';
+
+import 'levels_map.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -127,7 +131,63 @@ class _SignUpScreenState extends State<SignUpScreen> {
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {}, // TODO
+        // Sign up the user.
+        onPressed: () {
+          String username = _usernameTextFieldController.text;
+          String password = _passwordTextFieldController.text;
+          String confirmPassword = _confirmPasswordTextFieldController.text;
+          if (username.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+            // Show an error message if the fields are empty.
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('Please fill in all the fields.'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
+          } else if (password != confirmPassword) {
+            // Show an error message if the passwords do not match.
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('Passwords do not match.'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
+          } else {
+            //send the user credentials to the server
+            User user = User(
+                id: 0,
+                email: '$username@byte-wolves.com',
+                username: username,
+                password: password,
+                lectures: 0,
+                experience: 0,
+                level: 1);
+            signUp(user);
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const LevelMapPage(currentLevel: 1)));
+        }},
         child: const Text(
           'Sign Up',
           style: TextStyle(

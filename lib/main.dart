@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () async {
-                      final user = await UserService().getById(1);
+                      final user = await UserService().getById(2);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ProfileScreen(
                             user: user

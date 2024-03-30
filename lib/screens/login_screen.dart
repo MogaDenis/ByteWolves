@@ -1,6 +1,9 @@
 import 'package:byte_wolves/screens/signup_screen.dart';
+import 'package:byte_wolves/service/logging_service.dart';
 import 'package:flutter/material.dart';
+import '../models/user.dart';
 import '/constants/constants.dart';
+import 'levels_map.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -136,7 +139,62 @@ class _LoginScreenState extends State<LogInScreen> {
       padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {}, // TODO
+        onPressed: () {
+          String username = _usernameTextFieldController.text;
+          String password = _passwordTextFieldController.text;
+          if (username.isEmpty || password.isEmpty) {
+            // Show an error message if the fields are empty.
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('Please fill in all the fields.'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
+          } else {
+            //send the user credentials to the server
+            User user = User(
+                id: 0,
+                email: '$username@byte-wolves.com',
+                username: username,
+                password: password,
+                lectures: 0,
+                experience: 0,
+                level: 1);
+            signIn(user).then((value) {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => LevelMapPage(currentLevel: value.level.toDouble())));
+            }).catchError((error) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Error'),
+                    content: Text(error.toString()),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            });
+          }
+        },
         child: const Text(
           'Log In',
           style: TextStyle(
