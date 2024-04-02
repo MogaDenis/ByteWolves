@@ -186,8 +186,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 level: 1);
             signUp(user);
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const LevelMapPage(currentLevel: 1)));
-        }},
+                builder: (context) =>
+                    LevelMapPage(currentLevel: 1, user: user)));
+          }
+        },
         child: const Text(
           'Sign Up',
           style: TextStyle(
@@ -231,8 +233,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: ElevatedButton(
             // Return to the Sign In scrren.
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const LogInScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const LogInScreen()));
             },
             child: const Text(
               'Log In',

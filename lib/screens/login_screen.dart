@@ -173,7 +173,8 @@ class _LoginScreenState extends State<LogInScreen> {
                 level: 1);
             signIn(user).then((value) {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => LevelMapPage(currentLevel: value.level.toDouble())));
+                  builder: (context) => LevelMapPage(
+                      currentLevel: value.level.toDouble(), user: user)));
             }).catchError((error) {
               showDialog(
                 context: context,
