@@ -109,6 +109,7 @@ class _InputQuestionState extends State<InputQuestion> {
                     ElevatedButton(
                       onPressed: () {
                         _checkAnswer();
+                        Navigator.pop(context);
                       },
                       child: const Text(
                         'Submit your answer',

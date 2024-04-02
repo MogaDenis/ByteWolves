@@ -1,8 +1,13 @@
 import 'package:byte_wolves/constants/constants.dart';
+import 'package:byte_wolves/models/question.dart';
+import 'package:byte_wolves/screens/levels_map.dart';
+import 'package:byte_wolves/screens/multiple_answer_question.dart';
+import 'package:byte_wolves/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../models/lecture.dart';
+import 'input_question.dart';
 
 class LecturePage extends StatelessWidget {
   final Lecture lecture;
@@ -66,7 +71,30 @@ class LecturePage extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          final user = await UserService().getById(1);
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LevelMapPage(currentLevel: 2, user: user)
+                          ));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const InputQuestion(
+                                question:
+                                "A budget that accounts for emergencies can provide a safety net, reducing _________ stress",
+                                correctAnswer: "financial",
+                              )));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => MultipleAnswerQuestion(question: Question(id: 1, type: "multiple", text: "What is the primary purpose of budgeting?", lectureId: 1, correctAnswer: 'Safety', wa1: 'Restricting ', wa2: 'Tracking', wa3: 'Investing', ),
+                              )));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const InputQuestion(
+                                    question:
+                                        "Budgeting is essentially the act of controlling the flow of water into and out of the bucket symbolizing ______ and expenses",
+                                    correctAnswer: "income",
+                                  )));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => MultipleAnswerQuestion(question: Question(id: 2, type: "multiple", text: "What does effective budgeting involve?", lectureId: 1, correctAnswer: 'Saving', wa1: 'Stress', wa2: 'Risking', wa3: 'Convenience', ),
+                              )));
+                        },
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(
