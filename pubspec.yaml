@@ -39,6 +39,7 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   level_map: ^0.2.0
   dio: ^5.4.1
+  video_player: ^2.8.3
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/videos/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

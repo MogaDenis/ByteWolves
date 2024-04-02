@@ -53,6 +53,7 @@ class _MultipleAnswerQuestionState extends State<MultipleAnswerQuestion> {
         ElevatedButton(
           onPressed: () {
             _checkAnswer(answer1);
+            Navigator.pop(context);
           },
           child: Text(
             answer1.answerText,

@@ -14,6 +14,8 @@ import 'package:byte_wolves/service/question_service.dart';
 import 'package:byte_wolves/service/user_service.dart';
 import 'package:flutter/material.dart';
 
+import 'models/lecture.dart';
+
 void main() async {
   runApp(
     MaterialApp(
@@ -21,7 +23,7 @@ void main() async {
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => const SplashScreen(),
-        '/home': (context) => const MyApp(),
+        '/home': (context) => const SignUpScreen(),
       },
     ),
   );
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
 // ignore: must_be_immutable
 class MyHomePage extends StatefulWidget {
   late Question question;
+
   MyHomePage({super.key});
 
   @override
@@ -108,13 +111,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () async {
                       final lecture = await LectureService().getById(3);
+                      final user = await UserService().getById(1);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => LecturePage(
-                              lecture: Lectures(
+                              lecture: Lecture(
                                   title: lecture.title,
-                                  body:
-                                      lecture.body,
-                                  youtubeUrl: lecture.youtubeUrl))));
+                                  body: lecture.body,
+                                  youtubeUrl: lecture.youtubeUrl, id: 1, questions: []), user: user,)));
                     },
                     child: const Text(
                       'Go to "Lecture" screen',
@@ -132,9 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () async {
                       final user = await UserService().getById(2);
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ProfileScreen(
-                            user: user
-                          )));
+                          builder: (context) => ProfileScreen(user: user)));
                     },
                     child: const Text(
                       'Go to "Profile" screen',
@@ -188,10 +189,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       )),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      final user = await UserService().getById(1);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
-                              const LevelMapPage(currentLevel: 3.0)));
+                              LevelMapPage(currentLevel: 3.0, user: user)));
                     },
                     child: const Text(
                       'Go to "Level Map" screen',

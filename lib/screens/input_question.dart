@@ -63,9 +63,19 @@ class _InputQuestionState extends State<InputQuestion> {
   void _checkAnswer() {
     String userAnswer = _inputAnswerController.text.trim();
     if (userAnswer.toLowerCase() == widget.correctAnswer.toLowerCase()) {
-      //print("Correct\n");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Correct!"),
+          duration: Duration(seconds: 1),
+        ),
+      );
     } else {
-      //print("Incorrect\n");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Wrong!"),
+          duration: Duration(seconds: 1),
+        ),
+      );
     }
   }
 
@@ -109,6 +119,7 @@ class _InputQuestionState extends State<InputQuestion> {
                     ElevatedButton(
                       onPressed: () {
                         _checkAnswer();
+                        Navigator.pop(context);
                       },
                       child: const Text(
                         'Submit your answer',
