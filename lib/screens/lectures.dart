@@ -6,24 +6,40 @@ import 'package:byte_wolves/screens/levels_map.dart';
 import 'package:byte_wolves/screens/multiple_answer_question.dart';
 import 'package:byte_wolves/service/user_service.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:video_player/video_player.dart';
 
 import '../models/lecture.dart';
 import 'input_question.dart';
 
-class LecturePage extends StatelessWidget {
+class LecturePage extends StatefulWidget {
   final Lecture lecture;
-  late final YoutubePlayerController _controller;
   final User user;
 
-  LecturePage({super.key, required this.lecture, required this.user}) {
-    _controller = YoutubePlayerController(
-      initialVideoId: lecture.youtubeUrl,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        enableCaption: true,
-      ),
-    );
+  const LecturePage({super.key, required this.lecture, required this.user});
+
+  @override
+  _LecturePageState createState() => _LecturePageState();
+}
+
+class _LecturePageState extends State<LecturePage> {
+  late final VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset(
+        'assets/videos/The_Importance_of_Budgeting.mp4')
+      ..initialize().then((_) {
+        setState(() {
+          _controller.seekTo(const Duration(seconds: 10));
+        });
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
@@ -47,7 +63,7 @@ class LecturePage extends StatelessWidget {
                         children: <Widget>[
                           Expanded(
                             child: Text(
-                              lecture.title,
+                              widget.lecture.title,
                               style: const TextStyle(
                                   fontSize: 26,
                                   fontWeight: FontWeight.bold,
@@ -63,49 +79,74 @@ class LecturePage extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        lecture.body,
+                        widget.lecture.body,
                         textAlign: TextAlign.justify,
                         style:
-                            const TextStyle(fontSize: 18, color: Colors.white),
+                        const TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       const SizedBox(height: 8),
-                      YoutubePlayer(
-                        controller: _controller,
-                        showVideoProgressIndicator: true,
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (_controller.value.isPlaying) {
+                              _controller.pause();
+                            } else {
+                              _controller.play();
+                            }
+                          });
+                        },
+                        child: AspectRatio(
+                          aspectRatio: _controller.value.aspectRatio,
+                          child: Stack(
+                            alignment: Alignment.bottomCenter,
+                            children: <Widget>[
+                              VideoPlayer(_controller),
+                              ClosedCaption(
+                                  text: _controller.value.caption.text),
+                              // Controls
+                              const SizedBox(height: 8),
+                            ],
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 8),
                       TextButton(
                         onPressed: () async {
                           final updatedUser = User(
-                            id: user.id,
-                            username: user.username,
-                            email: user.email,
-                            level: user.level + 1,
-                            password: user.password,
-                            experience: user.experience + 100,
-                            lectures: user.lectures + 1,
+                            id: widget.user.id,
+                            username: widget.user.username,
+                            email: widget.user.email,
+                            level: widget.user.level + 1,
+                            password: widget.user.password,
+                            experience: widget.user.experience + 100,
+                            lectures: widget.user.lectures + 1,
                           );
                           UserService().update(updatedUser);
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LevelMapPage(
-                                  currentLevel: updatedUser.level.toDouble(), user: updatedUser)));
+                              builder: (context) =>
+                                  LevelMapPage(
+                                      currentLevel: updatedUser.level
+                                          .toDouble(),
+                                      user: updatedUser)));
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
-                                const EndQuizScreen(score: 100),
+                            const EndQuizScreen(score: 100),
                           ));
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const InputQuestion(
-                                    question:
-                                        "A budget that accounts for emergencies can provide a safety net, reducing _________ stress",
-                                    correctAnswer: "financial",
-                                  )));
+                              builder: (context) =>
+                              const InputQuestion(
+                                question:
+                                "A budget that accounts for emergencies can provide a safety net, reducing _________ stress",
+                                correctAnswer: "financial",
+                              )));
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => MultipleAnswerQuestion(
+                              builder: (context) =>
+                                  MultipleAnswerQuestion(
                                     question: Question(
                                       id: 1,
                                       type: "multiple",
                                       text:
-                                          "What is the primary purpose of budgeting?",
+                                      "What is the primary purpose of budgeting?",
                                       lectureId: 1,
                                       correctAnswer: 'Safety',
                                       wa1: 'Restricting ',
@@ -114,18 +155,20 @@ class LecturePage extends StatelessWidget {
                                     ),
                                   )));
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const InputQuestion(
-                                    question:
-                                        "Budgeting is essentially the act of controlling the flow of water into and out of the bucket symbolizing ______ and expenses",
-                                    correctAnswer: "income",
-                                  )));
+                              builder: (context) =>
+                              const InputQuestion(
+                                question:
+                                "Budgeting is essentially the act of controlling the flow of water into and out of the bucket symbolizing ______ and expenses",
+                                correctAnswer: "income",
+                              )));
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => MultipleAnswerQuestion(
+                              builder: (context) =>
+                                  MultipleAnswerQuestion(
                                     question: Question(
                                       id: 2,
                                       type: "multiple",
                                       text:
-                                          "What does effective budgeting involve?",
+                                      "What does effective budgeting involve?",
                                       lectureId: 1,
                                       correctAnswer: 'Saving up',
                                       wa1: 'Stress',
