@@ -23,7 +23,7 @@ void main() async {
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => const SplashScreen(),
-        '/home': (context) => const MyApp(),
+        '/home': (context) => const SignUpScreen(),
       },
     ),
   );
@@ -111,12 +111,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () async {
                       final lecture = await LectureService().getById(3);
+                      final user = await UserService().getById(1);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => LecturePage(
                               lecture: Lecture(
                                   title: lecture.title,
                                   body: lecture.body,
-                                  youtubeUrl: lecture.youtubeUrl, id: 1, questions: []))));
+                                  youtubeUrl: lecture.youtubeUrl, id: 1, questions: []), user: user,)));
                     },
                     child: const Text(
                       'Go to "Lecture" screen',

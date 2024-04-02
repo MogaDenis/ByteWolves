@@ -1,5 +1,7 @@
 import 'package:byte_wolves/constants/constants.dart';
 import 'package:byte_wolves/models/question.dart';
+import 'package:byte_wolves/models/user.dart';
+import 'package:byte_wolves/screens/endquiz_screen.dart';
 import 'package:byte_wolves/screens/levels_map.dart';
 import 'package:byte_wolves/screens/multiple_answer_question.dart';
 import 'package:byte_wolves/service/user_service.dart';
@@ -12,8 +14,9 @@ import 'input_question.dart';
 class LecturePage extends StatelessWidget {
   final Lecture lecture;
   late final YoutubePlayerController _controller;
+  final User user;
 
-  LecturePage({super.key, required this.lecture}) {
+  LecturePage({super.key, required this.lecture, required this.user}) {
     _controller = YoutubePlayerController(
       initialVideoId: lecture.youtubeUrl,
       flags: const YoutubePlayerFlags(
@@ -61,6 +64,7 @@ class LecturePage extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         lecture.body,
+                        textAlign: TextAlign.justify,
                         style:
                             const TextStyle(fontSize: 18, color: Colors.white),
                       ),
@@ -72,19 +76,43 @@ class LecturePage extends StatelessWidget {
                       const SizedBox(height: 8),
                       TextButton(
                         onPressed: () async {
-                          final user = await UserService().getById(1);
+                          final updatedUser = User(
+                            id: user.id,
+                            username: user.username,
+                            email: user.email,
+                            level: user.level + 1,
+                            password: user.password,
+                            experience: user.experience + 100,
+                            lectures: user.lectures + 1,
+                          );
+                          UserService().update(updatedUser);
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => LevelMapPage(currentLevel: 2, user: user)
+                              builder: (context) => LevelMapPage(
+                                  currentLevel: updatedUser.level.toDouble(), user: updatedUser)));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                const EndQuizScreen(score: 100),
                           ));
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => const InputQuestion(
-                                question:
-                                "A budget that accounts for emergencies can provide a safety net, reducing _________ stress",
-                                correctAnswer: "financial",
-                              )));
+                                    question:
+                                        "A budget that accounts for emergencies can provide a safety net, reducing _________ stress",
+                                    correctAnswer: "financial",
+                                  )));
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => MultipleAnswerQuestion(question: Question(id: 1, type: "multiple", text: "What is the primary purpose of budgeting?", lectureId: 1, correctAnswer: 'Safety', wa1: 'Restricting ', wa2: 'Tracking', wa3: 'Investing', ),
-                              )));
+                              builder: (context) => MultipleAnswerQuestion(
+                                    question: Question(
+                                      id: 1,
+                                      type: "multiple",
+                                      text:
+                                          "What is the primary purpose of budgeting?",
+                                      lectureId: 1,
+                                      correctAnswer: 'Safety',
+                                      wa1: 'Restricting ',
+                                      wa2: 'Tracking',
+                                      wa3: 'Investing',
+                                    ),
+                                  )));
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => const InputQuestion(
                                     question:
@@ -92,8 +120,19 @@ class LecturePage extends StatelessWidget {
                                     correctAnswer: "income",
                                   )));
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => MultipleAnswerQuestion(question: Question(id: 2, type: "multiple", text: "What does effective budgeting involve?", lectureId: 1, correctAnswer: 'Saving', wa1: 'Stress', wa2: 'Risking', wa3: 'Convenience', ),
-                              )));
+                              builder: (context) => MultipleAnswerQuestion(
+                                    question: Question(
+                                      id: 2,
+                                      type: "multiple",
+                                      text:
+                                          "What does effective budgeting involve?",
+                                      lectureId: 1,
+                                      correctAnswer: 'Saving up',
+                                      wa1: 'Stress',
+                                      wa2: 'Risking',
+                                      wa3: 'Convenience',
+                                    ),
+                                  )));
                         },
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.white,

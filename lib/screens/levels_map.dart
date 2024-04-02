@@ -24,6 +24,7 @@ class LevelMapPage extends StatelessWidget {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => LecturePage(
                     lecture: lecture,
+                    user: user,
                   )));
         },
         child: LevelMap(
